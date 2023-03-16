@@ -5,6 +5,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1>sahuidhsiudhsuidhis</h1>
+
+	<h1>Home Page</h1>
+    </div>
+    <a href="login.jsp">Login</a>
+    
 </body>
 </html>

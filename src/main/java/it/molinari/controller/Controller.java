@@ -34,47 +34,24 @@ public class Controller extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		
 
-		//Utente user = new Utente();
-		//Utente user = utenteservice.getUtente();
 		
 		UtenteService utenteService = new UtenteService();
-		
-		
-//		if(request.getQueryString() != null) {
-//			
-//			String split[] = request.getQueryString().split("=");
-//			
-//			try {
-//				
-//				Utente user = utenteService.estraiUtente(split[1]);
-//				//response.getWriter().append("Served at: " + user.getCognome() + " " + user.getNome() );
-//				response.getWriter().append(user.getCognome() + " " + user.getNome());
-//				
-//				
-//				
-//			} catch (SQLException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
-//			
-//			
-//		}else {
-//			response.getWriter().append("non hai inserito alcun path corretto");
-//		}
-//		
-		
-		
 		String str = request.getServletPath();
-		//response.getWriter().append(str);
-		
-	
+
 		try {
-			String id;
+			String id,nome,cognome;
 			switch(str) {
 			case "/deleteUtente":
 				//response.getWriter().append("vuoi eliminare");
+				id = request.getParameter("id");
+				if(id != null) {
+					utenteService.deleteUtente(id);
+					Utente user = utenteService.estraiUtente(id);
+					response.getWriter().append("hai cancellato utente con id "+id+": "+ user.getCognome() + " " + user.getNome());
+				}else {
+					response.getWriter().append("non hai inserito correttamnte");
+				}
 			break;
 			case "/getUtente":
 				//response.getWriter().append("vuoi leggere");
@@ -88,12 +65,26 @@ public class Controller extends HttpServlet {
 				
 			break;
 			case "/postUtente":
-				response.getWriter().append("vuoi inserire");
+				//response.getWriter().append("vuoi inserire");
+			
+			    nome = request.getParameter("nome");
+				cognome = request.getParameter("cognome");
+				if(nome != null && cognome != null) {
+					utenteService.postUtente(nome,cognome);
+					response.getWriter().append("inserito nuovo docente");
+					//Utente user = utenteService.estraiUtente(id);
+					//response.getWriter().append("hai aggiunto utente con id "+id+": "+ user.getCognome() + " " + user.getNome());
+					
+				}else {
+					response.getWriter().append("non hai inserito correttamnte");
+				}
+				
+				
 			break;
 			case "/putUtente":
 				//response.getWriter().append("vuoi editare");
 				id = request.getParameter("id");
-				String nome = request.getParameter("nome");
+				nome = request.getParameter("nome");
 				if(id != null) {
 					utenteService.putUtente(id, nome);
 					Utente user = utenteService.estraiUtente(id);

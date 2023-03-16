@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 
 import it.molinari.dao.Dao;
 import it.molinari.model.Utente;
@@ -26,11 +27,36 @@ public class UtenteService {
 		
 	}
 	
+	public Utente checkUtente(String user,String pass) throws SQLException {
+		Dao dao = new Dao();
+		return dao.cercaUtenteDao(user,pass);
+		
+	}
+	
 	public void putUtente(String id,String nome) throws SQLException{
-		Utente utente = new Utente();
 		
 		Dao dao = new Dao();
 		dao.modificaUtenteDao(id, nome);
+	}
+
+	public void deleteUtente(String id) throws SQLException {
+		// TODO Auto-generated method stub
+		Dao dao = new Dao();
+		dao.deleteUtenteDao(id);
+	}
+
+	public void postUtente(String nome,String cognome) throws SQLException {
+		// TODO Auto-generated method stub
+		Dao dao = new Dao();
+		dao.postUtenteDao(nome,cognome);
+		
+	}
+
+	public Object stampaTutto() throws SQLException {
+		// TODO Auto-generated method stub
+		
+		Dao dao = new Dao();
+		return  dao.stampaTuttoDao();
 	}
 	
 
